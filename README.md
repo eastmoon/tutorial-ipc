@@ -4,7 +4,7 @@
 
 在單核 ( Monolithic kernel ) 與微核 ( Microkernel ) 的架構中，將單核的垂直結構改為橫向結構，其主要方式便是將驅動、服務轉為執行程序，透過執行程序間通訊來擴展，讓必要的服務互相運作，避免冗餘的服務占用系統資源。
 
-![ipc-monolithic-kernel-and-Microkernel 圖示](./docs/img/ipc-monolithic-kernel-and-Microkernel.png)
+![ipc-monolithic-kernel-and-Microkernel 圖示](./doc/img/ipc-monolithic-kernel-and-Microkernel.png)
 > Reference : [Inter-Process Communication Mechanism in Monolithic Kernel and Microkernel]http://cdworkshop.eit.lth.se/fileadmin/eit/project/142/IPC_Report.pdf
 
 依據文獻，目前執行程序間通訊（IPC，Inter-Process Communication）常見方式如下：
