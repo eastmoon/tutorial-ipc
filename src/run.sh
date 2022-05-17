@@ -47,6 +47,11 @@ if [ -d ${TARGET_SOURCE_DIR} ]; then
         printf "\n----------\n"
         ${BUILD_DIR}/${TARGET_SOURCE_DIR}/example
         printf "\n----------\n"
+    elif [ -e ${BUILD_DIR}/${TARGET_SOURCE_DIR}/example.sh ];
+    then
+        printf "\n----------\n"
+        source ${BUILD_DIR}/${TARGET_SOURCE_DIR}/example.sh
+        printf "\n----------\n"
     else
         echo-e "Executable example file not in /build/${TARGET_SOURCE_DIR} directory."
     fi
