@@ -20,8 +20,8 @@
 
 依據參考文獻，目前執行程序間通訊（IPC，Inter-Process Communication）常見方式如下：
 
-+ [Shared files](#Shared files)
-+ [Shared memory](#Shared memory)
++ [Shared files](#shared-files)
++ [Shared memory](#shared-memory)
 + Pipes (named and unnamed)
 + Message queues
 + Sockets
