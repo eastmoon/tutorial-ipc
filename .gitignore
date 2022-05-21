@@ -1,5 +1,8 @@
 # Project folder
 cache/
+*.share
+*.lock
+*.sock
 
 # third-party library
 
