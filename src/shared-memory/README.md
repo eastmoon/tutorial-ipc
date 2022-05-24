@@ -17,5 +17,5 @@ dockerw start
 + 執行編譯腳本
 
 ```
-bash run.sh shared-files
+bash run.sh shared-memory
 ```
