@@ -19,7 +19,7 @@
 ```
 dockerw start
 ```
-> 本專案範g設計執行於 Winodws 環境下的 Docker 服務中
+> 本專案範設計執行於 Winodws 環境下的 Docker 服務中
 
 + 執行編譯腳本
 
