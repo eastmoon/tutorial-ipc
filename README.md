@@ -22,7 +22,7 @@
 
 + [Shared files](#shared-files)
 + [Shared memory](#shared-memory)
-+ Pipes (named and unnamed)
++ [Pipes (named and anonymous)](#pipes)
 + Message queues
 + Sockets
 + Signals
@@ -43,9 +43,27 @@
 共享檔案 ( Shared files ) 是個可運用於任何作業系統的簡易方式，其概念是透過檔案來傳遞資訊；然而這樣的方式很容易受到 I/O 影響執行效率且對檔案的快速寫入、讀取，會讓權管理異常使得資源無法獲得而進入飢餓 ( Starvation );
 但若運用於低傳訊頻率的執行程序間，是個簡易且技術相依低的運用方案。
 
-### Shared memory
+### [Shared memory](./src/shared-memory)
 
 共享記憶體 ( Shared memory ) 可視為共享檔案的進階方式，為解決前面提到對檔案存取產生的問題，則是將資料讀寫進記憶體，並令執行程序共享一個用於通訊的記憶體區域；雖然記憶體存取改善了效率與權限異常的風險，但共享記憶體並非無限的空間，因此在設計上僅限用於訊息的傳遞，倘若有大量的資料共享，則需回歸到共享檔案的方式來解決。
+
+### Pipes
+
+詳閱文獻後，一般在執行程序間通訊的文獻中提到管線，就是指匿名管線，命名管線則是指使用先入先處 ( FIFO ) 方式的管線。
+
+#### [Anonymous pipes](./src/pipes/anonymous)
+
+匿名管線 ( Anonymous pipes ) 或稱為管線 ( Pipes )，是基於 Unix 系統指令 [pipe](https://man7.org/linux/man-pages/man2/pipe.2.html) 的執行程序間通訊，這方式是透過管線在記憶體建立一個 "Virtual File"，並提供一個讀取 ( 0 )、寫入 ( 1 ) 的串流編號陣列，由於為串流資訊，因此可以透過 write、read 指令對其寫入內容。
+
+就其運作原理，管線與共享記憶體的運作方式相似，差別是對於記憶體宣告與讀寫管理是由管線系統管理，並提供指定串流讓訊息進出，程式上對內容相對容易管理；其缺點是管線僅適用於前述第二種執行程序啟動方式，亦即執行程序透過 fork 產生的自身的多執行程序運作方式。
+
+#### [Named pipes](./src/pipes/anonymous)
+
+命名管線  ( Named pipes ) 或稱為先入先出 ( FIFO、First-In-First-Out )，是基於 Unix 系統指令 [mknod](https://man7.org/linux/man-pages/man2/mknod.2.html) 的執行程序間通訊，這方式是透過 mknod 的 ```S_IFIFO``` 參數建立 FIFO 特殊檔案，在透過檔案讀寫機制來存取檔案內容。
+
+就其運作原理，命名管線與共享檔案的運作方式相似，差別是 FIFO 檔案具有柱列效果，而若共享檔案則需自行設計讀寫機制來自行設計管線的效果；其缺點是 FIFO 是讀取後內容會清除，並不適合雙向溝通或對多執行程序的廣播，倘若要雙向則需建立各自的檔案或設計延遲機制等待回應，而若廣播則需改用共享檔案的原理來設計。
+
+### Sockets
 
 ## 通訊格式
 
@@ -71,3 +89,4 @@
 + [fock - Linux manual page](https://man7.org/linux/man-pages/man2/fork.2.html)
     - [fork 觀念由淺入深](https://wenyuangg.github.io/posts/linux/fork-use.html)
     - [UNIX 作業系統 fork/exec 系統呼叫的前世今生](https://hackmd.io/@sysprog/unix-fork-exec)
+    - [在 C++ 中用 Fork 建立程序](https://www.delftstack.com/zh-tw/howto/cpp/cpp-fork/)
