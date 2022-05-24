@@ -57,7 +57,7 @@
 
 就其運作原理，管線與共享記憶體的運作方式相似，差別是對於記憶體宣告與讀寫管理是由管線系統管理，並提供指定串流讓訊息進出，程式上對內容相對容易管理；其缺點是管線僅適用於前述第二種執行程序啟動方式，亦即執行程序透過 fork 產生的自身的多執行程序運作方式。
 
-#### [Named pipes](./src/pipes/anonymous)
+#### [Named pipes](./src/pipes/named)
 
 命名管線  ( Named pipes ) 或稱為先入先出 ( FIFO、First-In-First-Out )，是基於 Unix 系統指令 [mknod](https://man7.org/linux/man-pages/man2/mknod.2.html) 的執行程序間通訊，這方式是透過 mknod 的 ```S_IFIFO``` 參數建立 FIFO 特殊檔案，在透過檔案讀寫機制來存取檔案內容。
 
