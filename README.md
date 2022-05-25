@@ -23,7 +23,7 @@
 + [Shared files](#shared-files)
 + [Shared memory](#shared-memory)
 + [Pipes (named and anonymous)](#pipes)
-+ Message queues
++ [Message queue](#message-queue)
 + Sockets
 + Signals
 
@@ -62,6 +62,16 @@
 命名管線  ( Named pipes ) 或稱為先入先出 ( FIFO、First-In-First-Out )，是基於 Unix 系統指令 [mknod](https://man7.org/linux/man-pages/man2/mknod.2.html) 的執行程序間通訊，這方式是透過 mknod 的 ```S_IFIFO``` 參數建立 FIFO 特殊檔案，在透過檔案讀寫機制來存取檔案內容。
 
 就其運作原理，命名管線與共享檔案的運作方式相似，差別是 FIFO 檔案具有柱列效果，而若共享檔案則需自行設計讀寫機制來自行設計管線的效果；其缺點是 FIFO 是讀取後內容會清除，並不適合雙向溝通或對多執行程序的廣播，倘若要雙向則需建立各自的檔案或設計延遲機制等待回應，而若廣播則需改用共享檔案的原理來設計。
+
+### [Message Queue](./src/message-queue)
+
+訊息柱列 ( Message queue ) 可視為共享記憶體的進階方式，藉由柱列管理的方案，提取記憶體中的格式化內容；相比共享記憶體的，訊息柱列有以下特點：
+
++ 訊息僅能自柱列的單一頻道提取一次
++ 訊息可寫入柱列中的不同頻道
++ 柱列訊息為先進先出 ( FIFO )
+
+由於訊息柱列的特性，使得共享記憶體適用於廣播的設計，而訊息柱列適用於單一服務的主動分頻道通訊。
 
 ### Sockets
 
