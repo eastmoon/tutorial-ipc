@@ -22,10 +22,11 @@
 
 + [Shared files](#shared-files)
 + [Shared memory](#shared-memory)
++ [Semaphores](#semaphores)
 + [Pipes (named and anonymous)](#pipes)
 + [Message queue](#message-queue)
-+ Sockets
-+ Signals
++ [Socket](#socket)
++ [Signals](#signals)
 
 並有兩個常見的執行程序啟動，方式如下：
 
@@ -46,6 +47,13 @@
 ### [Shared memory](./src/shared-memory)
 
 共享記憶體 ( Shared memory ) 可視為共享檔案的進階方式，為解決前面提到對檔案存取產生的問題，則是將資料讀寫進記憶體，並令執行程序共享一個用於通訊的記憶體區域；雖然記憶體存取改善了效率與權限異常的風險，但共享記憶體並非無限的空間，因此在設計上僅限用於訊息的傳遞，倘若有大量的資料共享，則需回歸到共享檔案的方式來解決。
+
+### Semaphores
+
+基於共享記憶體 ( Shared memory ) 的旗號 ( Semaphores ) 機制，其目的是考量共享記憶體在多執行程序運用時，假設多個執行程序同時有讀寫共享記憶體的需要，則透過旗號機制，來避免並行性 ( Concurrency ) 異常發生；依據實踐方式共有兩種旗號類型：
+
++ Binary Semaphores：使用 0、1 來做 lock、unlock 控制，以此達到互斥 ( Mutex ) 效果
++ Counting Semaphores：使用計數器來做資源控制，若資源被使用則增加計數，使用完畢則減少計數
 
 ### Pipes
 
@@ -73,9 +81,20 @@
 
 由於訊息柱列的特性，使得共享記憶體適用於廣播的設計，而訊息柱列適用於單一服務的主動分頻道通訊。
 
-### Sockets
+### Socket
 
-## 通訊格式
+[Socket](https://www.tutorialspoint.com/unix_sockets/what_is_socket.htm) 是一種運用於網路通訊機制的服務，其服務會建立一個 Client-Server 的雙向溝通線路；而根據文獻，Socket 機制本是基於不同執行程序間基於檔案描述的通訊機制，而檔案描述本是一數值，因此可用於開啟檔案、網路連線等操作。
+
+基於前述說明，Socket 嚴格來說可區分為兩種機制：
+
++ Internet Socket：應用於網際網路通訊的 Socket 通訊機制，例如 webocket 服務。
++ Domain Socket：應用於本地執行程序間的 Socket 通訊機制，例如 nginx cgi 服務。
+
+### Signals
+
+[信號 ( Signals )](https://en.wikipedia.org/wiki/Signal_(IPC)) 是對執行程序發送通知，以此觸發事件處理機制；信號是作業系統對執行程序的通訊機制，因此亦被稱為軟體中斷 ( software interrupt )，也可稱為異步事件 ( asynchronous event )；對於 Unix 系統可使用的事件類型可以參考 ```kill -l``` 的描述。
+
+原則上信號是默認啟動的動作，執行程序可以處理訊號、忽略信號，但有默認無法處理或忽略的訊號是 SIGSTOP、SIGKILL，亦即執行程序的暫停與刪除；且在 [Windows 的 Signal](https://docs.microsoft.com/zh-tw/cpp/c-runtime-library/reference/signal?view=msvc-170) 有很大的限制，且不可傳遞參數。
 
 ## 文獻
 
@@ -92,10 +111,6 @@
         + [POSIX 共享內存](https://jasonblog.github.io/note/linux_system/posix_gong_xiang_nei_cun.html)
         + [POSIX 訊息柱列](https://jasonblog.github.io/note/linux_system/posixxiao_xi_dui_lie.html)
     - [IPC Examples](https://condor.depaul.edu/dmumaugh/readings/handouts/CSC343/examples/ipc.example.html)
-+ [Unix Socket - Linux manual page](https://man7.org/linux/man-pages/man7/unix.7.html)
-    - [Unix domain socket](https://en.wikipedia.org/wiki/Unix_domain_socket)
-    - [Work Note-Unix domain socket](https://medium.com/@chinhung_liu/62b42f25ffc2)
-    - [Unix Socket Tutorial](https://www.tutorialspoint.com/unix_sockets/index.htm)
 + [fock - Linux manual page](https://man7.org/linux/man-pages/man2/fork.2.html)
     - [fork 觀念由淺入深](https://wenyuangg.github.io/posts/linux/fork-use.html)
     - [UNIX 作業系統 fork/exec 系統呼叫的前世今生](https://hackmd.io/@sysprog/unix-fork-exec)
