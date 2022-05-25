@@ -8,7 +8,8 @@ cd ${CURRENT_SHELL_DIRECTORY}/bin
 # Run executable file in bin directory.
 # How to Run Linux Commands in the Background, https://www.makeuseof.com/run-linux-commands-in-background/
 [ -e ./producer ] && ./producer > 0-producer.log &
-[ -e ./consumer ] && ./consumer > 1-consumer.log &
+[ -e ./consumer1 ] && ./consumer1 > 1-consumer.log &
+[ -e ./consumer2 ] && ./consumer2 > 2-consumer.log &
 
 # Wait for target second
 printf ">> Run executable file "

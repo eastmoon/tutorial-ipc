@@ -13,5 +13,6 @@ if ( EXISTS ${CMAKE_SOURCE_DIR}/example.sh )
 endif()
 
 # Add subdirecotry
-add_subdirectory(consumer)
+add_subdirectory(consumer1)
+add_subdirectory(consumer2)
 add_subdirectory(producer)

@@ -1,6 +1,6 @@
 # Declare cmake information
 cmake_minimum_required(VERSION 2.8.10)
-project(consumer)
+project(consumer2)
 
 # Add library & classes
 file(
