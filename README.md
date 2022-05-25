@@ -87,7 +87,7 @@
 
 基於前述說明，Socket 嚴格來說可區分為兩種機制：
 
-+ [Internet Socket](./socket/internet)：應用於網際網路通訊的 Socket 通訊機制，例如 webocket 服務。
++ [Internet Socket](./src/socket/internet)：應用於網際網路通訊的 Socket 通訊機制，例如 webocket 服務。
 + Domain Socket：應用於本地執行程序間的 Socket 通訊機制，例如 nginx cgi 服務。
 
 ### Signals
