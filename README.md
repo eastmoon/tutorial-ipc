@@ -90,7 +90,7 @@
 + [Internet Socket](./src/socket/internet)：應用於網際網路通訊的 Socket 通訊機制，例如 webocket 服務。
 + [Domain Socket](./src/socket/domain)：應用於本地執行程序間的 Socket 通訊機制，例如 nginx cgi 服務。
 
-### Signals
+### [Signals](./src/signals)
 
 [信號 ( Signals )](https://en.wikipedia.org/wiki/Signal_(IPC)) 是對執行程序發送通知，以此觸發事件處理機制；信號是作業系統對執行程序的通訊機制，因此亦被稱為軟體中斷 ( software interrupt )，也可稱為異步事件 ( asynchronous event )；對於 Unix 系統可使用的事件類型可以參考 ```kill -l``` 的描述。
 
